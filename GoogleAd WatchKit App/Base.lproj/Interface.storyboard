@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="7701"/>
+    </dependencies>
+    <scenes>
+        <!--Interface Controller-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="GoogleAd_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <table alignment="left" id="N5G-yS-a5J">
+                            <items>
+                                <tableRow identifier="Row" id="KFY-A7-fGs" customClass="RowController" customModule="GoogleAd_WatchKit_Extension">
+                                    <group key="rootItem" width="1" height="40.5" alignment="left" layout="vertical" id="Rt7-hm-RmR">
+                                        <items>
+                                            <label height="20" alignment="left" verticalAlignment="bottom" text="Label" textAlignment="center" id="2XC-Cc-Cxi">
+                                                <fontDescription key="font" type="system" pointSize="12"/>
+                                            </label>
+                                            <label alignment="left" text="Label" textAlignment="center" id="Ul0-so-EmP">
+                                                <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                            </label>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="desc" destination="2XC-Cc-Cxi" id="CKC-V1-6vM"/>
+                                        <outlet property="name" destination="Ul0-so-EmP" id="uZv-mP-R93"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                        <button width="1" height="25" alignment="left" title="Refresh" id="MoR-ez-gao">
+                            <connections>
+                                <action selector="refresh" destination="AgC-eL-Hgc" id="HES-1l-Gu9"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="table" destination="N5G-yS-a5J" id="at6-h1-orX"/>
+                    </connections>
+                </controller>
+            </objects>
+        </scene>
+        <!--Glance Interface Controller-->
+        <scene sceneID="khT-HF-bdg">
+            <objects>
+                <glanceController id="97E-to-V2u" customClass="GlanceController" customModule="GoogleAd_WatchKit_Extension">
+                    <items>
+                        <group alignment="left" id="0IU-AV-0L3">
+                            <items>
+                                <label width="122" height="43" alignment="left" text="GoogleAd" textAlignment="center" id="jnr-UX-wvn">
+                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" type="italicSystem" pointSize="20"/>
+                                </label>
+                            </items>
+                        </group>
+                        <group alignment="left" layout="vertical" id="EOq-wh-mff">
+                            <items>
+                                <label alignment="left" text="Name" id="cdf-cC-KJo">
+                                    <fontDescription key="font" type="system" pointSize="18"/>
+                                </label>
+                                <label alignment="left" verticalAlignment="center" text="Description" numberOfLines="2" id="cDJ-OM-K8R"/>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="descLabel" destination="cDJ-OM-K8R" id="xA7-2W-ZEw"/>
+                        <outlet property="nameLabel" destination="cdf-cC-KJo" id="tCG-p0-yt6"/>
+                    </connections>
+                </glanceController>
+            </objects>
+            <point key="canvasLocation" x="140" y="382"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="xHy-uq-jLh">
+            <objects>
+                <notificationController id="4JJ-vX-bbT">
+                    <items>
+                        <label alignment="left" text="Alert Label" id="J6N-p6-Q3F">
+                            <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </label>
+                    </items>
+                    <notificationCategory key="notificationCategory" id="Bhm-9k-xnG"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="J6N-p6-Q3F" id="z3d-YN-OPL"/>
+                        <segue destination="gs5-q3-vbY" kind="relationship" relationship="dynamicNotificationInterface" id="Lsg-6W-OdB"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="136" y="610"/>
+        </scene>
+        <!--DetailEntry-->
+        <scene sceneID="LF9-dQ-lhl">
+            <objects>
+                <controller identifier="DetailEntry" id="QEh-7L-waH" customClass="DetailEntryController" customModule="GoogleAd_WatchKit_Extension">
+                    <items>
+                        <label alignment="left" text="Name:" id="9rJ-q4-XEY"/>
+                        <label width="131" alignment="left" text="Label" id="wOk-GW-AKf">
+                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                        </label>
+                        <label alignment="left" text="Description:" id="IsX-xN-26T"/>
+                        <label width="134" alignment="left" text="Label" id="RCz-Ks-l86"/>
+                        <switch width="1" height="25" alignment="left" verticalAlignment="center" title="Show in Glance" id="kcp-gs-V1C">
+                            <fontDescription key="font" type="system" pointSize="10"/>
+                            <connections>
+                                <action selector="selectedSwitchValueChanged:" destination="QEh-7L-waH" id="8mD-Tk-xkx"/>
+                            </connections>
+                        </switch>
+                        <group width="1" alignment="left" verticalAlignment="bottom" id="h1U-dO-A69">
+                            <items>
+                                <button height="27" alignment="left" verticalAlignment="bottom" hidden="YES" title="Back" id="5dq-HA-cie">
+                                    <fontDescription key="font" type="system" pointSize="12"/>
+                                    <connections>
+                                        <action selector="back" destination="QEh-7L-waH" id="Sbs-yC-Cnp"/>
+                                    </connections>
+                                </button>
+                                <button height="27" alignment="left" verticalAlignment="bottom" title="Delete it!" id="mY1-Eu-Tvq">
+                                    <fontDescription key="font" type="system" pointSize="12"/>
+                                    <connections>
+                                        <action selector="delete" destination="QEh-7L-waH" id="2jf-DU-v5g"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="descLabel" destination="RCz-Ks-l86" id="rYE-Gu-cWy"/>
+                        <outlet property="nameLabel" destination="wOk-GW-AKf" id="D6D-CH-rbM"/>
+                        <outlet property="selectedSwitch" destination="kcp-gs-V1C" id="WcD-yG-Jfg"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="439" y="124"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="Ky6-ZN-kjj">
+            <objects>
+                <controller id="gs5-q3-vbY" customClass="NotificationController" customModule="GoogleAd_WatchKit_Extension">
+                    <items>
+                        <label alignment="left" text="Name" id="jHw-PA-mEu">
+                            <color key="textColor" red="0.50196081400000003" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="font" type="system" pointSize="18"/>
+                        </label>
+                        <label alignment="left" text="Description" id="Tf5-aI-8We">
+                            <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                        </label>
+                    </items>
+                    <connections>
+                        <outlet property="descLabel" destination="Tf5-aI-8We" id="rJn-cd-rSd"/>
+                        <outlet property="nameLabel" destination="jHw-PA-mEu" id="xKT-56-Kao"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="436" y="610"/>
+        </scene>
+    </scenes>
+</document>
