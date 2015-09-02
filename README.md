@@ -1,7 +1,7 @@
-Swift_GoogleAd
+Swift_GoogleAd2
 ==============
 
-A demo for display Google Ad banner using Swift/
+A demo for display Google Ad banner using Swift2/
 demo for display Google Interstitial/ 
 demo for display Apple Ad banner/
 demo for wrap FMDB/
@@ -13,6 +13,7 @@ demo for Apple Watch Glance/
 demo for Apple Watch Notification/
 
 
-The project should be compiled with Xcode 6.3.2 (Swift 1.2)
+The project should be compiled with Xcode 7 beta  (Swift 2)
 
+Run on device with iOS9 and watch with WatchOS 2
 
