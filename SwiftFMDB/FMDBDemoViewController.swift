@@ -17,14 +17,11 @@ class FMDBDemoViewController : UITableViewController,  GADInterstitialDelegate {
     var interstitial:GADInterstitial?
     
     override func viewDidLoad() {
-        let addButton = UIBarButtonItem(title: "Add", style: .Plain, target: self, action: "addEntry")
-        
-        self.navigationItem.rightBarButtonItem = addButton
-        
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
         interstitial = createAndLoadInterstitial()
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "displayInterstitial", name: "kDisplayInterstitialNotification", object: nil)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "refresh", name: "kRefreshFMDBNotification", object: nil)
@@ -36,20 +33,8 @@ class FMDBDemoViewController : UITableViewController,  GADInterstitialDelegate {
         self.tableView.reloadData()
     }
     
-    func addEntry() {
-        print("in add Entry")
-        
-        let addVC = AddEntryViewController()
-        let navVC = UINavigationController(rootViewController: addVC)
-        let backButton = UIBarButtonItem(title: "Back", style: .Plain, target: self, action: "back")
-        //backButton.tintColor = UIColor.redColor()
-        addVC.navigationItem.setLeftBarButtonItem(backButton, animated: true)
-        
-        self.presentViewController(navVC, animated: true, completion: nil)
-    }
-    
-    func back() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func backToMain(segue : UIStoryboardSegue) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     //table view data source

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8191" systemVersion="15A282b" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="8092"/>
     </dependencies>
     <scenes>
-        <!--Interface Controller-->
+        <!--FMDB demo-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="GoogleAd_WatchKit_App" customModuleProvider="target">
+                <controller title="FMDB demo" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="GoogleAd_WatchKit_App" customModuleProvider="target">
                     <items>
                         <table alignment="left" id="N5G-yS-a5J">
                             <items>
@@ -41,6 +41,7 @@
                     </connections>
                 </controller>
             </objects>
+            <point key="canvasLocation" x="211" y="195"/>
         </scene>
         <!--Glance Interface Controller-->
         <scene sceneID="khT-HF-bdg">
@@ -90,10 +91,10 @@
             </objects>
             <point key="canvasLocation" x="136" y="610"/>
         </scene>
-        <!--DetailEntry-->
+        <!--Detail -->
         <scene sceneID="LF9-dQ-lhl">
             <objects>
-                <controller identifier="DetailEntry" id="QEh-7L-waH" customClass="DetailEntryController" customModule="GoogleAd_WatchKit_Extension">
+                <controller identifier="DetailEntry" title="Detail " id="QEh-7L-waH" customClass="DetailEntryController" customModule="GoogleAd_WatchKit_Extension">
                     <items>
                         <label alignment="left" text="Name:" id="9rJ-q4-XEY"/>
                         <label width="131" alignment="left" text="Label" id="wOk-GW-AKf">
@@ -131,7 +132,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="439" y="124"/>
+            <point key="canvasLocation" x="449" y="235"/>
         </scene>
         <!--Notification Controller-->
         <scene sceneID="Ky6-ZN-kjj">

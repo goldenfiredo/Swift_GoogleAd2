@@ -1,25 +1,372 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6162" systemVersion="14A238h" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A282b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6160"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" id="vXZ-lx-hvc" customClass="ViewController" customModule="GoogleAd" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="admob.png" translatesAutoresizingMaskIntoConstraints="NO" id="XNG-kj-4c7">
+                                <rect key="frame" x="20" y="20" width="560" height="580"/>
+                                <animations/>
+                            </imageView>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xaD-4J-5yr">
+                                <rect key="frame" x="210" y="20" width="180" height="20"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="b5j-Km-OCe">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="400"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="20" identifier="ButtonAdHeight" id="e4M-dp-BOI">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="30"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="&lt;&lt;&lt;点此测试插屏广告&gt;&gt;&gt;"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                </variation>
+                                <connections>
+                                    <action selector="presentInterstitial:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="2uI-Ej-g5a"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oFu-xA-zXh">
+                                <rect key="frame" x="180" y="45" width="240" height="20"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="ipm-BP-JZ2">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="500"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="20" id="umw-K7-GwW">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="30"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="&lt;&lt;&lt;点此测试 Wrapping FMDB&gt;&gt;&gt;"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                </variation>
+                                <connections>
+                                    <segue destination="1VP-cp-lH5" kind="presentation" identifier="showFMDB" id="ARK-VI-nAX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0YQ-rD-rCm">
+                                <rect key="frame" x="160" y="70" width="280" height="20"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="LOH-ZB-6rV">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="30"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" constant="280" id="jsy-wR-6I5">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="600"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="&lt;&lt;&lt;点此测试 Wrapping CoreData&gt;&gt;&gt;"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                </variation>
+                                <connections>
+                                    <segue destination="0Xf-DS-WWZ" kind="presentation" identifier="showCoreData" id="Zmw-Cd-pkS"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="0YQ-rD-rCm" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="79g-1I-z3r"/>
+                            <constraint firstItem="0YQ-rD-rCm" firstAttribute="top" secondItem="oFu-xA-zXh" secondAttribute="bottom" constant="5" id="Ewx-Nm-6bh"/>
+                            <constraint firstItem="XNG-kj-4c7" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="SsF-S6-vCg"/>
+                            <constraint firstItem="xaD-4J-5yr" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="UKk-JP-IlX"/>
+                            <constraint firstItem="XNG-kj-4c7" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="Ung-Xe-zTe"/>
+                            <constraint firstItem="oFu-xA-zXh" firstAttribute="top" secondItem="xaD-4J-5yr" secondAttribute="bottom" constant="5" id="avJ-id-0kZ"/>
+                            <constraint firstItem="XNG-kj-4c7" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="eSz-Ak-A4L"/>
+                            <constraint firstItem="oFu-xA-zXh" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="s4a-JX-Yqk"/>
+                            <constraint firstItem="xaD-4J-5yr" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="txs-Ao-i5M"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="XNG-kj-4c7" secondAttribute="bottom" id="x5G-OS-8T4"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="buttonAd" destination="xaD-4J-5yr" id="39t-Xp-UTv"/>
+                        <outlet property="buttonCoreData" destination="0YQ-rD-rCm" id="mQT-ZU-JvU"/>
+                        <outlet property="buttonFMDB" destination="oFu-xA-zXh" id="dGO-du-e7u"/>
+                        <outlet property="imageView" destination="XNG-kj-4c7" id="sDJ-zT-OWz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="42" y="227"/>
+        </scene>
+        <!--FMDB Demo-->
+        <scene sceneID="hJZ-wP-Y3j">
+            <objects>
+                <tableViewController id="UPt-Px-3vN" customClass="FMDBDemoViewController" customModule="GoogleAd" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="P0k-43-42F">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FMDBCell" textLabel="dEO-su-mzz" detailTextLabel="n1k-kr-N8c" style="IBUITableViewCellStyleSubtitle" id="Uev-5L-QSF">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Uev-5L-QSF" id="jqO-eS-A3F">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dEO-su-mzz">
+                                            <rect key="frame" x="15" y="6" width="31.5" height="19.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="n1k-kr-N8c">
+                                            <rect key="frame" x="15" y="25.5" width="40.5" height="13.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <animations/>
+                                </tableViewCellContentView>
+                                <animations/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="UPt-Px-3vN" id="uCz-Nt-FDM"/>
+                            <outlet property="delegate" destination="UPt-Px-3vN" id="Ao8-U0-jf3"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="FMDB Demo" id="uIO-Sz-81G">
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="fNL-ZU-CAF">
+                            <connections>
+                                <action selector="backToMain:" destination="UPt-Px-3vN" id="6S9-0S-4m3"/>
+                                <segue destination="y1r-ur-ota" kind="unwind" unwindAction="unwindForSegue:" id="U64-DQ-PnD"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Add" id="IpO-7u-kZa">
+                            <connections>
+                                <segue destination="Ap4-9G-qZi" kind="presentation" id="dyi-j7-1N9"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EbW-17-tCT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="y1r-ur-ota" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1511" y="155"/>
+        </scene>
+        <!--Add Entity-->
+        <scene sceneID="8fQ-Es-4oS">
+            <objects>
+                <tableViewController id="FCq-nY-mM5" customClass="AddEntryViewController" customModule="GoogleAd" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="FBJ-RC-xxg">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <sections>
+                            <tableViewSection headerTitle="Entity Name:" id="RJ0-9s-zPN">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="83x-ND-O8v">
+                                        <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="83x-ND-O8v" id="QiJ-Qt-zK5">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pzm-ay-dVG">
+                                                    <rect key="frame" x="15" y="0.0" width="585" height="43"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <animations/>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Description:" id="6f3-ew-Vau">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="BDQ-NU-lWg">
+                                        <rect key="frame" x="0.0" y="207.5" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BDQ-NU-lWg" id="i4I-26-Ksu">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fj2-h3-dX6">
+                                                    <rect key="frame" x="18" y="8" width="582" height="30"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <animations/>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="FCq-nY-mM5" id="22d-yh-aJm"/>
+                            <outlet property="delegate" destination="FCq-nY-mM5" id="9YL-J9-w2n"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Add Entity" id="FbH-bE-HjG">
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="QeF-9k-bHf">
+                            <connections>
+                                <action selector="closeAddEntity:" destination="FCq-nY-mM5" id="dcl-2P-aRY"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="fp3-qt-Kl7">
+                            <connections>
+                                <action selector="saveEntity:" destination="FCq-nY-mM5" id="2bx-B7-G6h"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="descTextField" destination="Fj2-h3-dX6" id="YtE-37-RWQ"/>
+                        <outlet property="nameTextField" destination="Pzm-ay-dVG" id="KlL-gS-taT"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GhB-Nq-RUA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2939" y="155"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="keJ-x6-h07">
+            <objects>
+                <navigationController id="Ap4-9G-qZi" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ud4-qC-WTO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="FCq-nY-mM5" kind="relationship" relationship="rootViewController" id="ibO-g2-yMJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="797-5p-dlJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2222" y="155"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Mp5-Nx-wjG">
+            <objects>
+                <navigationController id="1VP-cp-lH5" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="idN-jP-Qbz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="UPt-Px-3vN" kind="relationship" relationship="rootViewController" id="Zel-dE-VhU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xSQ-zL-jL9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="820" y="155"/>
+        </scene>
+        <!--Core Data Demo-->
+        <scene sceneID="GlU-kE-U0R">
+            <objects>
+                <tableViewController id="We8-dX-y9i" customClass="CoreDataDemoViewController" customModule="GoogleAd" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="vjV-uw-IZb">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CoreDataCell" textLabel="sFO-Md-06i" style="IBUITableViewCellStyleDefault" id="8Lk-NZ-Iez">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Lk-NZ-Iez" id="eEY-5C-H1f">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sFO-Md-06i">
+                                            <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <animations/>
+                                </tableViewCellContentView>
+                                <animations/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="We8-dX-y9i" id="m45-XY-9J6"/>
+                            <outlet property="delegate" destination="We8-dX-y9i" id="IAw-ew-mAD"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Core Data Demo" id="u0G-AH-pm4">
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="Kqr-xX-Khs">
+                            <connections>
+                                <action selector="backToMain:" destination="We8-dX-y9i" id="wZ3-34-yqn"/>
+                                <segue destination="qU9-39-gGg" kind="unwind" unwindAction="unwindForSegue:" id="JfD-fg-la3"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Add" id="4C8-pw-Qd1">
+                            <connections>
+                                <action selector="addPerson" destination="We8-dX-y9i" id="Gg2-dy-8IS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ghb-kd-jhV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="qU9-39-gGg" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1511" y="981"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="44X-uf-Bh1">
+            <objects>
+                <navigationController id="0Xf-DS-WWZ" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ozm-uq-2Bf">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="We8-dX-y9i" kind="relationship" relationship="rootViewController" id="VlV-SE-mjz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ODc-Dj-x9m" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="820" y="976"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="admob.png" width="320" height="480"/>
+    </resources>
 </document>

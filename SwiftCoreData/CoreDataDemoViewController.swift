@@ -18,14 +18,11 @@ class CoreDataDemoViewController : UITableViewController, GADInterstitialDelegat
     var interstitial:GADInterstitial?
     
     override func viewDidLoad() {
-        let addButton = UIBarButtonItem(title: "Add", style: .Plain, target: self, action: "addPerson")
-        
-        self.navigationItem.rightBarButtonItem = addButton
-        
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
         interstitial = createAndLoadInterstitial()
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "displayInterstitial", name: "kDisplayInterstitialNotification", object: nil)
         
         dal = CoreDataDAL()
@@ -39,7 +36,11 @@ class CoreDataDemoViewController : UITableViewController, GADInterstitialDelegat
         self.tableView.reloadData()
     }
     
-    func addPerson() {
+    @IBAction func backToMain(segue : UIStoryboardSegue) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func addPerson() {
         print("in add Person")
         
         let alert = UIAlertController(title: "New Person", message: "Add a new Person", preferredStyle: .Alert)
