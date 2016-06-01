@@ -13,7 +13,7 @@ demo for Apple Watch Glance/
 demo for Apple Watch Notification/
 
 
-The project should be compiled with Xcode 7 beta  (Swift 2)
+The project should be compiled with Xcode 7.3.1 beta  (Swift 3.0)
 
 Run on device with iOS9 and watch with WatchOS 2
 

@@ -23,11 +23,11 @@ class CoreDataDemoViewController : UITableViewController, GADInterstitialDelegat
         
         interstitial = createAndLoadInterstitial()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "displayInterstitial", name: "kDisplayInterstitialNotification", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CoreDataDemoViewController.displayInterstitial), name: "kDisplayInterstitialNotification", object: nil)
         
         dal = CoreDataDAL()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationWillTerminate", name: UIApplicationWillTerminateNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CoreDataDemoViewController.applicationWillTerminate), name: UIApplicationWillTerminateNotification, object: nil)
     }
     
     override func viewDidAppear(animated: Bool) {

@@ -35,7 +35,8 @@ class ViewController: UIViewController, GADBannerViewDelegate, GADInterstitialDe
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        iAdSupported = iAdTimeZoneSupported()
+        //iAdSupported = iAdTimeZoneSupported()
+        iAdSupported = false //Apple has stopped iAd service
         
         if iAdSupported {
             iAdView = ADBannerView(adType: ADAdType.Banner)
@@ -54,7 +55,7 @@ class ViewController: UIViewController, GADBannerViewDelegate, GADInterstitialDe
             self.view.addSubview(bannerView!)
             
             timer?.invalidate()
-            timer = NSTimer.scheduledTimerWithTimeInterval(40, target: self, selector: "GoogleAdRequestTimer", userInfo: nil, repeats: true)
+            timer = NSTimer.scheduledTimerWithTimeInterval(40, target: self, selector: #selector(ViewController.GoogleAdRequestTimer), userInfo: nil, repeats: true)
         }
         
         //Admob Interstitial
@@ -68,9 +69,9 @@ class ViewController: UIViewController, GADBannerViewDelegate, GADInterstitialDe
         
         _ = Marquee(superview: self.view , text: marqueeText)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "AppBecomeActive", name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.AppBecomeActive), name: UIApplicationDidBecomeActiveNotification, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "AppResignActive", name: UIApplicationWillResignActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.AppResignActive), name: UIApplicationWillResignActiveNotification, object: nil)
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -82,7 +83,7 @@ class ViewController: UIViewController, GADBannerViewDelegate, GADInterstitialDe
     }
     
     func scheduleRequest(wait:NSTimeInterval) {
-        NSTimer.scheduledTimerWithTimeInterval(wait, target: self, selector: "GoogleAdRequestTimer", userInfo: nil, repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(wait, target: self, selector: #selector(ViewController.GoogleAdRequestTimer), userInfo: nil, repeats: false)
     }
     
     func GoogleAdRequestTimer() {

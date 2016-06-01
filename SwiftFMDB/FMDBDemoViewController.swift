@@ -22,9 +22,9 @@ class FMDBDemoViewController : UITableViewController,  GADInterstitialDelegate {
         
         interstitial = createAndLoadInterstitial()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "displayInterstitial", name: "kDisplayInterstitialNotification", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FMDBDemoViewController.displayInterstitial), name: "kDisplayInterstitialNotification", object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "refresh", name: "kRefreshFMDBNotification", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FMDBDemoViewController.refresh), name: "kRefreshFMDBNotification", object: nil)
     }
     
     override func viewDidAppear(animated: Bool) {
