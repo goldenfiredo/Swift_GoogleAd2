@@ -23,53 +23,53 @@ class CoreDataDemoViewController : UITableViewController, GADInterstitialDelegat
         
         interstitial = createAndLoadInterstitial()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CoreDataDemoViewController.displayInterstitial), name: "kDisplayInterstitialNotification", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CoreDataDemoViewController.displayInterstitial), name: NSNotification.Name(rawValue: "kDisplayInterstitialNotification"), object: nil)
         
         dal = CoreDataDAL()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CoreDataDemoViewController.applicationWillTerminate), name: UIApplicationWillTerminateNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CoreDataDemoViewController.applicationWillTerminate), name: NSNotification.Name.UIApplicationWillTerminate, object: nil)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         people = dal.getAllPersons()
     
         self.tableView.reloadData()
     }
     
-    @IBAction func backToMain(segue : UIStoryboardSegue) {
-        dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func backToMain(_ segue : UIStoryboardSegue) {
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func addPerson() {
         print("in add Person")
         
-        let alert = UIAlertController(title: "New Person", message: "Add a new Person", preferredStyle: .Alert)
+        let alert = UIAlertController(title: "New Person", message: "Add a new Person", preferredStyle: .alert)
         
-        let saveAction = UIAlertAction(title: "Save", style: .Default) { (action: UIAlertAction) -> Void in
+        let saveAction = UIAlertAction(title: "Save", style: .default) { (action: UIAlertAction) -> Void in
                 let textField = alert.textFields![0] 
                 self.saveName(textField.text!)
                 self.tableView.reloadData()
         }
         
         let cancelAction = UIAlertAction(title: "Cancel",
-            style: .Default) { (action: UIAlertAction) -> Void in
+            style: .default) { (action: UIAlertAction) -> Void in
         }
         
-        alert.addTextFieldWithConfigurationHandler {
+        alert.addTextField {
             (textField: UITextField!) -> Void in
         }
         
         alert.addAction(saveAction)
         alert.addAction(cancelAction)
         
-        presentViewController(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
-    func saveName(name: String) {
+    func saveName(_ name: String) {
         if let person = dal.savePerson(name) {
             people.append(person)
             
-            NSNotificationCenter.defaultCenter().postNotificationName("kDisplayInterstitialNotification", object: nil)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "kDisplayInterstitialNotification"), object: nil)
         }
     }
     
@@ -79,27 +79,27 @@ class CoreDataDemoViewController : UITableViewController, GADInterstitialDelegat
     }
     
     //table view data source
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return people.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: nil)
-        let person = people[indexPath.row]
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: nil)
+        let person = people[(indexPath as NSIndexPath).row]
         cell.textLabel!.text = person.name
         
         return cell
     }
     
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        let person = people[indexPath.row]
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        let person = people[(indexPath as NSIndexPath).row]
         if self.dal.deletePerson(person.name) {
-            self.people.removeAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            self.people.remove(at: (indexPath as NSIndexPath).row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
     
@@ -107,25 +107,25 @@ class CoreDataDemoViewController : UITableViewController, GADInterstitialDelegat
     func createAndLoadInterstitial()->GADInterstitial {
         let interstitial = GADInterstitial(adUnitID: "ca-app-pub-6938332798224330/6206234808")
         interstitial.delegate = self
-        interstitial.loadRequest(GADRequest())
+        interstitial.load(GADRequest())
         
         return interstitial
     }
     
     //Interstitial delegate
-    func interstitial(ad: GADInterstitial!, didFailToReceiveAdWithError error: GADRequestError!) {
+    func interstitial(_ ad: GADInterstitial!, didFailToReceiveAdWithError error: GADRequestError!) {
         print("interstitialDidFailToReceiveAdWithError:\(error.localizedDescription)")
         interstitial = createAndLoadInterstitial()
     }
     
-    func interstitialWillDismissScreen(ad: GADInterstitial!) {
+    func interstitialWillDismissScreen(_ ad: GADInterstitial!) {
         
     }
     
     func displayInterstitial() {
         if let _ = interstitial?.isReady {
             if interstitial?.hasBeenUsed != true {
-                interstitial?.presentFromRootViewController(self)
+                interstitial?.present(fromRootViewController: self)
             }
         }
     }

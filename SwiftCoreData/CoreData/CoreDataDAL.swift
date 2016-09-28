@@ -23,7 +23,7 @@ class CoreDataDAL {
         return people
     }
     
-    func savePerson(name:String)->PersonModal? {
+    func savePerson(_ name:String)->PersonModal? {
         if let person = dao.saveEntity(name) {
             return person as? PersonModal
         }
@@ -31,7 +31,7 @@ class CoreDataDAL {
         return nil
     }
  
-    func deletePerson(name:String)->Bool {
+    func deletePerson(_ name:String)->Bool {
         return dao.deleteEntity(name)
     }
     

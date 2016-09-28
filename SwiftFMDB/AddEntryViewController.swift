@@ -15,14 +15,14 @@ class AddEntryViewController : UITableViewController {
     @IBOutlet weak var descTextField: UITextField!
     
     override func viewDidLoad() {
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.white
     }
     
-    @IBAction func closeAddEntity(segue:UIStoryboardSegue) {
-        dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func closeAddEntity(_ segue:UIStoryboardSegue) {
+        dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func saveEntity(segue:UIStoryboardSegue) {
+    @IBAction func saveEntity(_ segue:UIStoryboardSegue) {
         let name = nameTextField!.text!
         let desc = descTextField!.text!
         print("in save entry. name:\(name), description:\(desc)")
@@ -34,16 +34,16 @@ class AddEntryViewController : UITableViewController {
             entry1.description = desc
             dal.insertEntry(entry1)
             
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
             
-            NSNotificationCenter.defaultCenter().postNotificationName("kDisplayInterstitialNotification", object: nil)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "kDisplayInterstitialNotification"), object: nil)
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 0 {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (indexPath as NSIndexPath).section == 0 {
             nameTextField!.becomeFirstResponder()
-        } else if indexPath.section == 1 {
+        } else if (indexPath as NSIndexPath).section == 1 {
             descTextField!.becomeFirstResponder()
         }
     }

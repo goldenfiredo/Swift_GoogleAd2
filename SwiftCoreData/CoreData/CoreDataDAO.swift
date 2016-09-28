@@ -21,13 +21,13 @@ class CoreDataDAO {
         
         let managedContext = context.managedObjectContext!
         
-        let fetchRequest = NSFetchRequest(entityName:"Person")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName:"Person")
         
         //3
         //var error: NSError?
         
         do {
-            try entity = managedContext.executeFetchRequest(fetchRequest) as! [NSManagedObject]
+            try entity = managedContext.fetch(fetchRequest) as! [NSManagedObject]
         } catch {
             
         }
@@ -41,18 +41,18 @@ class CoreDataDAO {
         return entity
     }
     
-    func queryEntityByName(name:String)->NSManagedObject?{
+    func queryEntityByName(_ name:String)->NSManagedObject?{
         var entity = [NSManagedObject]()
         
         let managedContext = context.managedObjectContext!
         
-        let fetchRequest = NSFetchRequest(entityName:"Person")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName:"Person")
         let predicate = NSPredicate(format: "%K = %@", "name", name)
         fetchRequest.predicate = predicate
         
         //var error: NSError?
         do {
-            try entity = managedContext.executeFetchRequest(fetchRequest) as! [NSManagedObject]
+            try entity = managedContext.fetch(fetchRequest) as! [NSManagedObject]
         } catch {
             return nil
         }
@@ -74,16 +74,16 @@ class CoreDataDAO {
         return entity[0]
     }
     
-    func saveEntity(name:String)->NSManagedObject? {
+    func saveEntity(_ name:String)->NSManagedObject? {
         if let _ = queryEntityByName(name) {
             return nil
         }
         
         let managedContext = context.managedObjectContext!
         
-        let entity =  NSEntityDescription.entityForName("Person", inManagedObjectContext:managedContext)
+        let entity =  NSEntityDescription.entity(forEntityName: "Person", in:managedContext)
         
-        let person = NSManagedObject(entity: entity!, insertIntoManagedObjectContext:managedContext)
+        let person = NSManagedObject(entity: entity!, insertInto:managedContext)
         
         person.setValue(name, forKey: "name")
         
@@ -99,12 +99,12 @@ class CoreDataDAO {
         return person
     }
     
-    func deleteEntity(name:String)->Bool {
+    func deleteEntity(_ name:String)->Bool {
         let managedContext = context.managedObjectContext!
         
         let entityToDelete = queryEntityByName(name)
         if let entity = entityToDelete {
-            managedContext.deleteObject(entity)
+            managedContext.delete(entity)
             
             do {
                 try managedContext.save()

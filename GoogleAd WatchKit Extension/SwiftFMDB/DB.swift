@@ -10,17 +10,19 @@ import Foundation
 
 class DB {
     
-    class var sharedInstance: DB {
-        struct Static {
-            static var instance: DB?
-            static var token: dispatch_once_t = 0
-        }
-        
-        dispatch_once(&Static.token) {
+    struct Static {
+        static var instance: DB?
+        static var token: Int = 0
+    }
+
+    private static var __once: () = {
             Static.instance = DB()
             
             Static.instance?.initDatabase()
-        }
+        }()
+    
+    class var sharedInstance: DB {
+        _ = DB.__once
         
         return Static.instance!
     }
@@ -29,27 +31,27 @@ class DB {
         return "table1"
     }
     
-    private var db:FMDatabase?
+    fileprivate var db:FMDatabase?
     
     func getDatabase()->FMDatabase? {
         return db
     }
     
-    private func initDatabase()->Bool {
+    fileprivate func initDatabase()->Bool {
         var result:Bool = false
         let table_name = DB.tableName
         //let documentPath : AnyObject = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask,true)[0]
         //let dbPath:String = documentPath.stringByAppendingPathComponent("demo.db")
-        let url = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier("group.test.abc")
+        let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.test.abc")
         if url == nil {
             return false
         }
         
-        let dbPath:String = url!.URLByAppendingPathComponent("demo.db").path!
+        let dbPath:String = url!.appendingPathComponent("demo.db").path
         
-        let filemanager = NSFileManager.defaultManager()
-        if !filemanager.fileExistsAtPath(dbPath) {
-            result = filemanager.createFileAtPath(dbPath, contents: nil, attributes: nil)
+        let filemanager = FileManager.default
+        if !filemanager.fileExists(atPath: dbPath) {
+            result = filemanager.createFile(atPath: dbPath, contents: nil, attributes: nil)
             if !result {
                 return false
             }
@@ -69,7 +71,7 @@ class DB {
             
             if !db!.tableExists(table_name) {
                 let creat_table = "CREATE TABLE \(table_name) (id INTEGER PRIMARY KEY, name VARCHAR(80), description VARCHAR(80))"
-                result = db!.executeUpdate(creat_table, withArgumentsInArray: nil)
+                result = db!.executeUpdate(creat_table, withArgumentsIn: nil)
             }
         }
         

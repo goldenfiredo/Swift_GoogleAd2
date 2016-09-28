@@ -23,13 +23,13 @@ class ViewController: UIViewController, GADBannerViewDelegate, GADInterstitialDe
     var iAdView:ADBannerView?
     var bannerView:GADBannerView?
     var interstitial:GADInterstitial?
-    var timer:NSTimer?
+    var timer:Timer?
     var loadRequestAllowed = true
     let statusbarHeight:CGFloat = 20.0
     var buttonHeight:CGFloat = 0.0
     var buttonOffsetY:CGFloat = 0.0
-    let screen = UIScreen.mainScreen().bounds
-    let IS_IPAD = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.Pad
+    let screen = UIScreen.main.bounds
+    let IS_IPAD = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,8 +39,8 @@ class ViewController: UIViewController, GADBannerViewDelegate, GADInterstitialDe
         iAdSupported = false //Apple has stopped iAd service
         
         if iAdSupported {
-            iAdView = ADBannerView(adType: ADAdType.Banner)
-            iAdView?.frame = CGRectMake(0, 0 - iAdView!.frame.height, iAdView!.frame.width, iAdView!.frame.height)
+            iAdView = ADBannerView(adType: ADAdType.banner)
+            iAdView?.frame = CGRect(x: 0, y: 0 - iAdView!.frame.height, width: iAdView!.frame.width, height: iAdView!.frame.height)
             iAdView?.delegate = self
             self.view.addSubview(iAdView!)
         } else {
@@ -55,7 +55,7 @@ class ViewController: UIViewController, GADBannerViewDelegate, GADInterstitialDe
             self.view.addSubview(bannerView!)
             
             timer?.invalidate()
-            timer = NSTimer.scheduledTimerWithTimeInterval(40, target: self, selector: #selector(ViewController.GoogleAdRequestTimer), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(timeInterval: 40, target: self, selector: #selector(ViewController.GoogleAdRequestTimer), userInfo: nil, repeats: true)
         }
         
         //Admob Interstitial
@@ -64,17 +64,17 @@ class ViewController: UIViewController, GADBannerViewDelegate, GADInterstitialDe
         if !iAdSupported {
             interstitial = createAndLoadInterstitial()
         } else {
-            buttonAd.hidden = true;
+            buttonAd.isHidden = true;
         }
         
         _ = Marquee(superview: self.view , text: marqueeText)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.AppBecomeActive), name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.AppBecomeActive), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.AppResignActive), name: UIApplicationWillResignActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.AppResignActive), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.relayoutViews(false)
@@ -82,8 +82,8 @@ class ViewController: UIViewController, GADBannerViewDelegate, GADInterstitialDe
         self.view.makeToast("Ready for demo")
     }
     
-    func scheduleRequest(wait:NSTimeInterval) {
-        NSTimer.scheduledTimerWithTimeInterval(wait, target: self, selector: #selector(ViewController.GoogleAdRequestTimer), userInfo: nil, repeats: false)
+    func scheduleRequest(_ wait:TimeInterval) {
+        Timer.scheduledTimer(timeInterval: wait, target: self, selector: #selector(ViewController.GoogleAdRequestTimer), userInfo: nil, repeats: false)
     }
     
     func GoogleAdRequestTimer() {
@@ -97,7 +97,7 @@ class ViewController: UIViewController, GADBannerViewDelegate, GADInterstitialDe
         }
         
         print("load request")
-        bannerView?.loadRequest(GADRequest())
+        bannerView?.load(GADRequest())
     }
     
     func AppBecomeActive() {
@@ -118,36 +118,36 @@ class ViewController: UIViewController, GADBannerViewDelegate, GADInterstitialDe
     }
     
     //GADBannerViewDelegate
-    func adViewDidReceiveAd(view: GADBannerView!) {
+    func adViewDidReceiveAd(_ view: GADBannerView!) {
         print("adViewDidReceiveAd");
         relayoutViews(true)
     }
     
-    func adView(view: GADBannerView!, didFailToReceiveAdWithError error: GADRequestError!) {
+    func adView(_ view: GADBannerView!, didFailToReceiveAdWithError error: GADRequestError!) {
         print("\(view) error:\(error)")
         relayoutViews(false)
     }
     
-    func adViewWillPresentScreen(adView: GADBannerView!) {
+    func adViewWillPresentScreen(_ adView: GADBannerView!) {
         print("adViewWillPresentScreen")
         relayoutViews(false)
     }
     
-    func adViewWillLeaveApplication(adView: GADBannerView!) {
+    func adViewWillLeaveApplication(_ adView: GADBannerView!) {
         print("adViewWillLeaveApplication")
         relayoutViews(false)
     }
     
-    func adViewWillDismissScreen(adView: GADBannerView!) {
+    func adViewWillDismissScreen(_ adView: GADBannerView!) {
         print("adViewWillDismissScreen")
         relayoutViews(false)
     }
     
-    func adViewDidDismissScreen(bannerView: GADBannerView!) {
+    func adViewDidDismissScreen(_ bannerView: GADBannerView!) {
         print("adViewDidDismissScreen")
     }
     
-    func relayoutViews(displayed:Bool) {
+    func relayoutViews(_ displayed:Bool) {
         if (displayed) {
             var bannerFrame = iAdSupported ? iAdView!.frame : bannerView!.frame
             bannerFrame.origin.x = (screen.width - bannerFrame.width)/2
@@ -223,46 +223,46 @@ class ViewController: UIViewController, GADBannerViewDelegate, GADInterstitialDe
         print("createAndLoadInterstitial")
         let interstitial = GADInterstitial(adUnitID: "ca-app-pub-6938332798224330/6206234808")
         interstitial.delegate = self
-        interstitial.loadRequest(GADRequest())
+        interstitial.load(GADRequest())
         
         return interstitial
     }
     
-    @IBAction func presentInterstitial(sender:UIButton!) {
+    @IBAction func presentInterstitial(_ sender:UIButton!) {
         if let _ = interstitial?.isReady {
-            interstitial?.presentFromRootViewController(self)
+            interstitial?.present(fromRootViewController: self)
         }
     }
     
     //Interstitial delegate
-    func interstitial(ad: GADInterstitial!, didFailToReceiveAdWithError error: GADRequestError!) {
+    func interstitial(_ ad: GADInterstitial!, didFailToReceiveAdWithError error: GADRequestError!) {
         print("interstitialDidFailToReceiveAdWithError:\(error.localizedDescription)")
-        buttonAd?.enabled = false
+        buttonAd?.isEnabled = false
         interstitial = createAndLoadInterstitial()
     }
     
-    func interstitialDidReceiveAd(ad: GADInterstitial!) {
+    func interstitialDidReceiveAd(_ ad: GADInterstitial!) {
         print("interstitialDidReceiveAd")
-        buttonAd?.enabled = true
+        buttonAd?.isEnabled = true
     }
     
-    func interstitialWillDismissScreen(ad: GADInterstitial!) {
+    func interstitialWillDismissScreen(_ ad: GADInterstitial!) {
         print("interstitialWillDismissScreen")
-        buttonAd?.enabled = false
+        buttonAd?.isEnabled = false
         interstitial = createAndLoadInterstitial()
     }
     
-    func interstitialDidDismissScreen(ad: GADInterstitial!) {
+    func interstitialDidDismissScreen(_ ad: GADInterstitial!) {
         print("interstitialDidDismissScreen")
         scheduleRequest(3)
     }
     
-    func interstitialWillLeaveApplication(ad: GADInterstitial!) {
+    func interstitialWillLeaveApplication(_ ad: GADInterstitial!) {
         print("interstitialWillLeaveApplication")
         relayoutViews(false)
     }
     
-    func interstitialWillPresentScreen(ad: GADInterstitial!) {
+    func interstitialWillPresentScreen(_ ad: GADInterstitial!) {
         print("interstitialWillPresentScreen")
         relayoutViews(false)
     }
@@ -270,8 +270,8 @@ class ViewController: UIViewController, GADBannerViewDelegate, GADInterstitialDe
     
     //iAd func
     func iAdTimeZoneSupported()->Bool {
-        let iAdTimeZones = "America/;US/;Pacific/;Asia/Tokyo;Europe/".componentsSeparatedByString(";")
-        let myTimeZone = NSTimeZone.localTimeZone().name
+        let iAdTimeZones = "America/;US/;Pacific/;Asia/Tokyo;Europe/".components(separatedBy: ";")
+        let myTimeZone = TimeZone.autoupdatingCurrent.identifier
         for zone in iAdTimeZones {
             if (myTimeZone.hasPrefix(zone)) {
                 return true;
@@ -282,38 +282,38 @@ class ViewController: UIViewController, GADBannerViewDelegate, GADInterstitialDe
     }
     
     //iAdBannerViewDelegate
-    func bannerViewWillLoadAd(banner: ADBannerView!) {
+    func bannerViewWillLoadAd(_ banner: ADBannerView!) {
         print("bannerViewWillLoadAd")
     }
     
-    func bannerViewDidLoadAd(banner: ADBannerView!) {
+    func bannerViewDidLoadAd(_ banner: ADBannerView!) {
         print("bannerViewDidLoadAd")
         relayoutViews(true)
     }
     
-    func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
+    func bannerView(_ banner: ADBannerView!, didFailToReceiveAdWithError error: Error!) {
         print("bannerViewDidFailToReceiveAd error:\(error)")
         relayoutViews(false)
     }
     
-    func bannerViewActionDidFinish(banner: ADBannerView!) {
+    func bannerViewActionDidFinish(_ banner: ADBannerView!) {
         print("bannerViewActionDidFinish")
         relayoutViews(false)
     }
     
-    func bannerViewActionShouldBegin(banner: ADBannerView!, willLeaveApplication willLeave: Bool) -> Bool {
+    func bannerViewActionShouldBegin(_ banner: ADBannerView!, willLeaveApplication willLeave: Bool) -> Bool {
         print("bannerViewActionShouldBeginWillLeaveApplication")
         return true;
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         loadRequestAllowed = false
         if !iAdSupported {
             relayoutViews(false)
         }
     }
     
-    @IBAction func unwindForSegue(unwindSegue: UIStoryboardSegue) {
+    @IBAction func unwindForSegue(_ unwindSegue: UIStoryboardSegue) {
         loadRequestAllowed = true
         
         scheduleRequest(3)

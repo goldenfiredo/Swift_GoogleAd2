@@ -11,11 +11,11 @@ import Foundation
 class EntryDAL {
     let dao = DAO()
     
-    func insertEntry(entry:Entry)->Bool {
+    func insertEntry(_ entry:Entry)->Bool {
         return dao.insert(entry.name, description: entry.description)
     }
     
-    func deleteEntry(entry:Entry)->Bool {
+    func deleteEntry(_ entry:Entry)->Bool {
         return dao.delete(entry.name, description: entry.description)
     }
     
@@ -23,7 +23,7 @@ class EntryDAL {
        return dao.getRecordSet()
     }
     
-    func query(name:String,description:String)->Entry?{
+    func query(_ name:String,description:String)->Entry?{
         return dao.query(name, description: description)
     }
 }

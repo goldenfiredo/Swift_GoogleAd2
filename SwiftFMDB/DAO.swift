@@ -24,53 +24,53 @@ class DAO {
         let sql = "SELECT * FROM \(tableName)"
         print("\(sql)")
         
-        let rs = db.executeQuery(sql, withArgumentsInArray: nil)
-        while (rs.next()) {
+        let rs = db.executeQuery(sql, withArgumentsIn: nil)
+        while (rs?.next())! {
             let entry = Entry()
-            let id = rs.intForColumn("id")
-            let name = rs.stringForColumn("name")
-            let desc = rs.stringForColumn("description")
-            entry.id = id
-            entry.name = name
-            entry.description = desc
+            let id = rs?.int(forColumn: "id")
+            let name = rs?.string(forColumn: "name")
+            let desc = rs?.string(forColumn: "description")
+            entry.id = id!
+            entry.name = name!
+            entry.description = desc!
             
             print("id:\(id), name:\(name), desc:\(desc)")
             
             result.append(entry)
         }
         
-        rs.close()
+        rs?.close()
         
         return result
     }
     
-    func query(name:String, description:String)->Entry? {
+    func query(_ name:String, description:String)->Entry? {
         var result:Entry?
         
         let sql = "SELECT * FROM \(tableName) where name= ? and description = ?"
         let args = [name, description]
         print("\(sql)")
         
-        let rs = db.executeQuery(sql, withArgumentsInArray: args)
-        if (rs.next()) {
+        let rs = db.executeQuery(sql, withArgumentsIn: args)
+        if (rs?.next())! {
             result = Entry()
-            let id = rs.intForColumn("id")
-            let name = rs.stringForColumn("name")
-            let desc = rs.stringForColumn("description")
-            result!.id = id
-            result!.name = name
-            result!.description = desc
+            let id = rs?.int(forColumn: "id")
+            let name = rs?.string(forColumn: "name")
+            let desc = rs?.string(forColumn: "description")
+            result!.id = id!
+            result!.name = name!
+            result!.description = desc!
         }
     
         return result
     }
     
-    func insert(name:String, description:String)->Bool {
+    func insert(_ name:String, description:String)->Bool {
         let sql = "INSERT INTO \(tableName) (name, description) VALUES (?, ?)"
         let args = [name, description]
         print("\(sql)")
         
-        db.executeUpdate(sql, withArgumentsInArray: args)
+        db.executeUpdate(sql, withArgumentsIn: args)
         
         if db.hadError() {
             print("error:\(db.lastErrorMessage())", terminator: "")
@@ -80,12 +80,12 @@ class DAO {
         return true
     }
     
-    func delete(name:String, description:String)->Bool {
+    func delete(_ name:String, description:String)->Bool {
         let sql = "DELETE FROM \(tableName) where name= ? and description = ?"
         let args = [name, description]
         print("\(sql)")
         
-        db.executeUpdate(sql, withArgumentsInArray: args)
+        db.executeUpdate(sql, withArgumentsIn: args)
         
         if db.hadError() {
             print("error:\(db.lastErrorMessage())", terminator: "")

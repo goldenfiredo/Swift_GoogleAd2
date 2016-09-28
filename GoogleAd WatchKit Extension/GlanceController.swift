@@ -15,12 +15,12 @@ class GlanceController: WKInterfaceController {
     @IBOutlet weak var nameLabel: WKInterfaceLabel!
     @IBOutlet weak var descLabel: WKInterfaceLabel!
     
-    let defaults = NSUserDefaults.standardUserDefaults()
+    let defaults = UserDefaults.standard
     
     var rowData=[Entry]()
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         // Configure interface objects here.
         
@@ -31,7 +31,7 @@ class GlanceController: WKInterfaceController {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
         
-        if let selectedEntry = defaults.stringForKey("selectedEntry") {
+        if let selectedEntry = defaults.string(forKey: "selectedEntry") {
             for ent in rowData {
                 if ent.name == selectedEntry {
                     nameLabel.setText(ent.name)

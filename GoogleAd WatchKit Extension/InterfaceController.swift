@@ -26,8 +26,8 @@ class InterfaceController: WKInterfaceController {
     
     var rowData=[Entry]()
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         NSLog("%@ awakeWithContext", self)
         // Configure interface objects here.
     }
@@ -46,19 +46,19 @@ class InterfaceController: WKInterfaceController {
         
         for i in 0 ..< rowData.count {
             let rd = rowData[i]
-            if let row = table.rowControllerAtIndex(i) as? RowController {
+            if let row = table.rowController(at: i) as? RowController {
                 row.name.setText(rd.name)
                 row.desc.setText(rd.description)
             }
         }
     }
 
-    override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
+    override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
         print("didSelectRowAtIndex")
         
         let data = rowData[rowIndex]
         
-        pushControllerWithName("DetailEntry", context: data)
+        pushController(withName: "DetailEntry", context: data)
     }
     
     override func didDeactivate() {
@@ -74,21 +74,21 @@ class InterfaceController: WKInterfaceController {
         load()
     }
     
-    override func handleUserActivity(userInfo: [NSObject : AnyObject]!) {
+    override func handleUserActivity(_ userInfo: [AnyHashable: Any]!) {
         if let handedEntry = userInfo["entry"] as? String {
             for ent in rowData {
                 if ent.name == handedEntry {
-                    pushControllerWithName("DetailEntry", context: ent)
+                    pushController(withName: "DetailEntry", context: ent)
                     break
                 }
             }
         }
     }
     
-    override func handleActionWithIdentifier(identifier: String?, forLocalNotification localNotification: UILocalNotification) {
+    override func handleAction(withIdentifier identifier: String?, for localNotification: UILocalNotification) {
         var rd = EntryDAL().getAllEntries()
         if rd.count > 0 {
-            pushControllerWithName("DetailEntry", context: rd[0])
+            pushController(withName: "DetailEntry", context: rd[0])
         }
     }
 }

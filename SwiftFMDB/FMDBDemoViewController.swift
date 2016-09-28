@@ -22,44 +22,44 @@ class FMDBDemoViewController : UITableViewController,  GADInterstitialDelegate {
         
         interstitial = createAndLoadInterstitial()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FMDBDemoViewController.displayInterstitial), name: "kDisplayInterstitialNotification", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(FMDBDemoViewController.displayInterstitial), name: NSNotification.Name(rawValue: "kDisplayInterstitialNotification"), object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FMDBDemoViewController.refresh), name: "kRefreshFMDBNotification", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(FMDBDemoViewController.refresh), name: NSNotification.Name(rawValue: "kRefreshFMDBNotification"), object: nil)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         data = dal.getAllEntries()
     
         self.tableView.reloadData()
     }
     
-    @IBAction func backToMain(segue : UIStoryboardSegue) {
-        dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func backToMain(_ segue : UIStoryboardSegue) {
+        dismiss(animated: true, completion: nil)
     }
     
     //table view data source
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let index = indexPath.row
-        let cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: nil)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let index = (indexPath as NSIndexPath).row
+        let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: nil)
         cell.textLabel?.text = data[index].name
         cell.detailTextLabel?.text = data[index].description
         
         return cell
     }
     
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        let e = data[indexPath.row]
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        let e = data[(indexPath as NSIndexPath).row]
         if dal.deleteEntry(e) {
-            data.removeAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            data.remove(at: (indexPath as NSIndexPath).row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
     
@@ -67,18 +67,18 @@ class FMDBDemoViewController : UITableViewController,  GADInterstitialDelegate {
     func createAndLoadInterstitial()->GADInterstitial {
         let interstitial = GADInterstitial(adUnitID: "ca-app-pub-6938332798224330/6206234808")
         interstitial.delegate = self
-        interstitial.loadRequest(GADRequest())
+        interstitial.load(GADRequest())
         
         return interstitial
     }
     
     //Interstitial delegate
-    func interstitial(ad: GADInterstitial!, didFailToReceiveAdWithError error: GADRequestError!) {
+    func interstitial(_ ad: GADInterstitial!, didFailToReceiveAdWithError error: GADRequestError!) {
         print("interstitialDidFailToReceiveAdWithError:\(error.localizedDescription)")
         interstitial = createAndLoadInterstitial()
     }
     
-    func interstitialWillDismissScreen(ad: GADInterstitial!) {
+    func interstitialWillDismissScreen(_ ad: GADInterstitial!) {
         interstitial = createAndLoadInterstitial()
     }
     
@@ -96,7 +96,7 @@ class FMDBDemoViewController : UITableViewController,  GADInterstitialDelegate {
     
     func displayInterstitial() {
         if let _ = interstitial?.isReady {
-            interstitial?.presentFromRootViewController(self)
+            interstitial?.present(fromRootViewController: self)
         }
     }
     

@@ -10,49 +10,49 @@ class Marquee {
         createMarquee(superview, text:text)
     }
     
-    func createMarquee(superview:UIView, text:String) {
+    func createMarquee(_ superview:UIView, text:String) {
         let tf = TextFlowView(frame: CGRect(x:0,y:0,width:320,height:40), text: text)
         
-        tf.translatesAutoresizingMaskIntoConstraints = false
-        tf.backgroundColor = UIColor.clearColor()
-        tf.tintColor = UIColor.whiteColor()
-        superview.addSubview(tf)
+        tf?.translatesAutoresizingMaskIntoConstraints = false
+        tf?.backgroundColor = UIColor.clear
+        tf?.tintColor = UIColor.white
+        superview.addSubview(tf!)
         
-        let topConstraint = NSLayoutConstraint(item:tf,
-            attribute:.Bottom,
-            relatedBy:.Equal,
+        let topConstraint = NSLayoutConstraint(item:tf!,
+            attribute:.bottom,
+            relatedBy:.equal,
             toItem:superview,
-            attribute:.Bottom,
+            attribute:.bottom,
             multiplier:1.0,
             constant:-50.0
         )
         superview.addConstraint(topConstraint)
         
-        let leftConstraint = NSLayoutConstraint(item:tf,
-            attribute:.Leading,
-            relatedBy:.Equal,
+        let leftConstraint = NSLayoutConstraint(item:tf!,
+            attribute:.leading,
+            relatedBy:.equal,
             toItem:superview,
-            attribute:.Leading,
+            attribute:.leading,
             multiplier:1.0,
             constant:0.0
         )
         superview.addConstraint(leftConstraint)
         
-        let rightConstraint = NSLayoutConstraint(item:tf,
-            attribute:.Trailing,
-            relatedBy:.Equal,
+        let rightConstraint = NSLayoutConstraint(item:tf!,
+            attribute:.trailing,
+            relatedBy:.equal,
             toItem:superview,
-            attribute:.Trailing,
+            attribute:.trailing,
             multiplier:1.0,
             constant:0.0
         )
         superview.addConstraint(rightConstraint)
         
-        let heightConstraint = NSLayoutConstraint(item:tf,
-            attribute:.Height,
-            relatedBy:.Equal,
+        let heightConstraint = NSLayoutConstraint(item:tf!,
+            attribute:.height,
+            relatedBy:.equal,
             toItem:nil,
-            attribute:.NotAnAttribute,
+            attribute:.notAnAttribute,
             multiplier:1.0,
             constant:40.0
         )
