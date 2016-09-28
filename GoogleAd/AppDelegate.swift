@@ -86,7 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if #available(iOS 10.0, *) {
             let content = UNMutableNotificationContent()
-            content.title = "Notification"
+            content.title = String(format: "Notification(%d)", num*num*num)
             content.body = "It's time to notify you"
             content.sound = UNNotificationSound.default()
             content.badge = num as NSNumber?
@@ -117,7 +117,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if #available(iOS 10.0, *) {
             let center = UNUserNotificationCenter.current()
-            //center.removeDeliveredNotifications(withIdentifiers: ["my notification"])
             center.removePendingNotificationRequests(withIdentifiers: ["mynotification1","mynotification2","mynotification3"])
         } else {
             UIApplication.shared.cancelAllLocalNotifications()
