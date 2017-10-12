@@ -25,15 +25,20 @@ class ViewController: UIViewController, GADBannerViewDelegate, GADInterstitialDe
     var interstitial:GADInterstitial?
     var timer:Timer?
     var loadRequestAllowed = true
-    let statusbarHeight:CGFloat = 20.0
+    var statusbarHeight:CGFloat = 20.0
     var buttonHeight:CGFloat = 0.0
     var buttonOffsetY:CGFloat = 0.0
     let screen = UIScreen.main.bounds
     let IS_IPAD = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad
+    let IS_iPhoneX = (UIScreen.main.bounds.size.width == 375 && UIScreen.main.bounds.size.height == 812)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        if IS_iPhoneX {
+            statusbarHeight = 44.0
+        }
         
         //iAdSupported = iAdTimeZoneSupported()
         iAdSupported = false //Apple has stopped iAd service
