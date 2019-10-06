@@ -1,10 +1,3 @@
-//
-//  DB.swift
-//  SwiftFMDBDemo
-//
-//  Created by Limin Du on 11/15/14.
-//  Copyright (c) 2014 GoldenFire.Do. All rights reserved.
-//
 
 import Foundation
 

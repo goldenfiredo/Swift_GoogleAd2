@@ -1,10 +1,3 @@
-//
-//  DAO.swift
-//  SwiftFMDBDemo
-//
-//  Created by Du Limin on 11/15/14.
-//  Copyright (c) 2014 GoldenFire.Do. All rights reserved.
-//
 
 import Foundation
 
